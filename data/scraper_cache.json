@@ -1,0 +1,17 @@
+{
+  "result_RCB_SRH_": {
+    "team1": "RCB",
+    "team2": "SRH",
+    "date": "",
+    "top_scorers": [],
+    "top_wicket_takers": [],
+    "player_performances": [],
+    "injuries_reported": [],
+    "source": "default",
+    "_timestamp": 1774733303.864326
+  },
+  "injury_updates": {
+    "injuries": [],
+    "_timestamp": 1774733304.42047
+  }
+}

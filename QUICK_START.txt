@@ -1,0 +1,108 @@
+╔════════════════════════════════════════════════════════════════╗
+║   IPL 2026 FANTASY TEAM BUILDER - QUICK START (5 MINUTES)     ║
+╚════════════════════════════════════════════════════════════════╝
+
+STEP 1: CREATE YOUR PROJECT FOLDER
+─────────────────────────────────────
+Open Terminal/Command Prompt and run:
+
+  mkdir ~/IPL2026_Fantasy && cd ~/IPL2026_Fantasy
+
+STEP 2: COPY YOUR FILES
+──────────────────────
+Copy all these files to ~/IPL2026_Fantasy/:
+  
+  ✓ IPL_2026_Fantasy_Team_Builder.xlsx
+  ✓ IPL_2026_Players_Comprehensive.xlsx
+  ✓ IPL_2026_My11Circle_Fantasy_Rules.xlsx
+  ✓ team_builder_basic.py
+  ✓ team_builder_advanced.py
+  ✓ CLAUDE_CODE_SETUP_GUIDE.md
+
+STEP 3: INSTALL PYTHON LIBRARIES
+────────────────────────────────
+Run this command:
+
+  pip install openpyxl pandas numpy
+
+STEP 4: RUN YOUR FIRST SCRIPT
+─────────────────────────────
+Run this command:
+
+  python team_builder_basic.py
+
+Expected output:
+  ✓ Team Builder initialized
+  ✓ Loaded 400+ players
+  ✓ Teams built successfully!
+
+STEP 5: USING WITH CLAUDE CODE
+───────────────────────────────
+First, get API key from https://console.anthropic.com/
+
+Then set it:
+  export ANTHROPIC_API_KEY="your-key-here"
+
+Then run Claude Code:
+  claude-code "Run the Python script ~/IPL2026_Fantasy/team_builder_basic.py"
+
+═════════════════════════════════════════════════════════════════
+
+AVAILABLE COMMANDS IN CLAUDE CODE:
+
+1️⃣ Run basic team builder:
+   claude-code "Run ~/IPL2026_Fantasy/team_builder_basic.py"
+
+2️⃣ Generate advanced teams:
+   claude-code "Run ~/IPL2026_Fantasy/team_builder_advanced.py"
+
+3️⃣ Generate Phase 1 teams (Matches 1-14):
+   claude-code "
+   Modify team_builder_advanced.py to:
+   1. Read all 14 Phase 1 matches from IPL_2026_Schedule.xlsx
+   2. For each match, build both My11Circle and TATA IPL teams
+   3. Set optimal captains for each venue
+   4. Export all results to Phase1_Teams.xlsx
+   "
+
+4️⃣ Create transfer tracker:
+   claude-code "
+   Create a new script transfer_tracker.py that:
+   1. Tracks 40 Phase 1 transfers
+   2. Recommends swaps based on form
+   3. Exports transfer plan to Excel
+   "
+
+═════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING:
+
+Problem: "ModuleNotFoundError: No module named 'openpyxl'"
+Solution: pip install openpyxl pandas numpy
+
+Problem: "FileNotFoundError: IPL_2026_Players_Comprehensive.xlsx"
+Solution: Copy all .xlsx files to ~/IPL2026_Fantasy/ folder
+
+Problem: "ANTHROPIC_API_KEY not set"
+Solution: export ANTHROPIC_API_KEY="your-key-from-console.anthropic.com"
+
+═════════════════════════════════════════════════════════════════
+
+NEXT STEPS:
+
+✓ Follow this Quick Start (5 min)
+✓ Read CLAUDE_CODE_SETUP_GUIDE.md (10 min) for detailed instructions
+✓ Run team_builder_basic.py and verify it works
+✓ Use Claude Code commands to generate teams
+✓ Set up scheduling for automated team generation
+
+═════════════════════════════════════════════════════════════════
+
+Questions? Check CLAUDE_CODE_SETUP_GUIDE.md for:
+  - Part 1: Installation guide
+  - Part 3: Ready-to-use scripts with explanations
+  - Part 4: Claude Code commands
+  - Part 7: Quick start options
+  - Part 8: Troubleshooting
+
+═════════════════════════════════════════════════════════════════
