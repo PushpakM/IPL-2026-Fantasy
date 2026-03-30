@@ -10,7 +10,8 @@ Two platforms:
 from typing import Dict, List, Optional
 import pandas as pd
 
-from core.scorer import estimate_fantasy_points, get_matchup_bonus, TIER_WEIGHTS
+from core.scorer import estimate_fantasy_points, get_matchup_bonus, TIER_WEIGHTS, get_weather_multiplier
+from core.scraper import get_weather_for_match
 from core.validator import validate_team, get_valid_role_combinations, PLATFORM_RULES
 
 
@@ -50,8 +51,13 @@ def build_best_xi(
     # If playing XI is available, filter to only confirmed players
     if playing_xi:
         confirmed_names = set()
-        for team_name, player_list in playing_xi.items():
-            confirmed_names.update(player_list)
+        for key, value in playing_xi.items():
+            if isinstance(value, dict) and "players" in value:
+                # Nested format: {team1: {team, players}, team2: {team, players}}
+                confirmed_names.update(value["players"])
+            elif isinstance(value, list):
+                # Simple format: {team_name: [players]}
+                confirmed_names.update(value)
         if confirmed_names:
             xi_mask = available["Player Name"].isin(confirmed_names)
             xi_filtered = available[xi_mask]
@@ -60,6 +66,9 @@ def build_best_xi(
 
     if len(available) < 11:
         return {"error": f"Not enough available players: {len(available)}", "players": []}
+
+    # Fetch weather for this venue
+    weather = get_weather_for_match(venue_name) if venue_name else None
 
     # Determine effective risk mode
     effective_mode = risk_mode if platform == "my11circle" else "balanced"
@@ -84,7 +93,7 @@ def build_best_xi(
         else:
             p_adjusted = p
 
-        score1 = estimate_fantasy_points(p_adjusted, venue_name, platform)
+        score1 = estimate_fantasy_points(p_adjusted, venue_name, platform, weather=weather)
 
         # Aggressive mode: extra bonus for all-rounders (more scoring dimensions)
         if effective_mode == "aggressive" and p.get("RoleCode") == "AR":
@@ -95,7 +104,7 @@ def build_best_xi(
             score1 *= 1.05
 
         if use_lookahead:
-            score2 = estimate_fantasy_points(p_adjusted, next_venue, platform)
+            score2 = estimate_fantasy_points(p_adjusted, next_venue, platform, weather=None)  # No weather for future match
             combined = 0.7 * score1 + 0.3 * score2
         else:
             combined = score1
@@ -198,6 +207,20 @@ def build_best_xi(
         "aggressive": "Differential picks. Value-tier gems, all-rounders, venue specialists.",
     }
 
+    # Build weather summary for display
+    weather_info = None
+    if weather:
+        weather_info = {
+            "city": weather.get("city", ""),
+            "temp_c": weather.get("temp_c", 0),
+            "humidity": weather.get("humidity", 0),
+            "dew_factor": weather.get("dew_factor", 0),
+            "wind_kph": weather.get("wind_kph", 0),
+            "condition": weather.get("condition", ""),
+            "rain_chance": weather.get("rain_chance", 0),
+            "impact": weather.get("fantasy_impact", {}),
+        }
+
     return {
         "players": best_team,
         "captain": captain,
@@ -210,6 +233,7 @@ def build_best_xi(
         "risk_mode": effective_mode,
         "strategy": strategy_desc.get(effective_mode, ""),
         "used_playing_xi": playing_xi is not None and bool(playing_xi),
+        "weather": weather_info,
     }
 
 

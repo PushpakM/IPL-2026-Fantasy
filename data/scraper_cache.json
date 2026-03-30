@@ -8,10 +8,71 @@
     "player_performances": [],
     "injuries_reported": [],
     "source": "default",
-    "_timestamp": 1774733303.864326
+    "_timestamp": 1774785722.420347
   },
   "injury_updates": {
     "injuries": [],
-    "_timestamp": 1774733304.42047
+    "_timestamp": 1774785722.6481018
+  },
+  "playing_xi_MI_KKR": {
+    "team1": {
+      "team": "MI",
+      "players": [],
+      "source": "none"
+    },
+    "team2": {
+      "team": "KKR",
+      "players": [],
+      "source": "none"
+    },
+    "toss": {
+      "winner": "",
+      "decision": ""
+    },
+    "scraped_at": "2026-03-29T19:20:16.818590",
+    "_timestamp": 1774792216.818601
+  },
+  "weather_Wankhede_": {
+    "city": "Mumbai",
+    "venue": "Wankhede",
+    "temp_c": 32,
+    "humidity": 74,
+    "dew_factor": 0.8,
+    "wind_kph": 12,
+    "condition": "Clear",
+    "rain_chance": 1,
+    "source": "live",
+    "updated_at": "2026-03-29T19:10:00",
+    "fantasy_impact": {
+      "dew_advantage": "chase",
+      "batting_factor": 1.08,
+      "swing_factor": 1.15,
+      "pace_factor": 1.05,
+      "spin_factor": 1.0,
+      "rain_risk": "none",
+      "summary": "Heavy dew expected \u2014 chasing team favored, bowlers may struggle in 2nd innings. High humidity + wind \u2014 swing bowlers (pace) get a big boost"
+    },
+    "_timestamp": 1774878039.585919
+  },
+  "weather_Barsapara Stadium_": {
+    "city": "",
+    "venue": "Barsapara Stadium",
+    "source": "defaults",
+    "temp_c": 32,
+    "humidity": 55,
+    "dew_factor": 0.5,
+    "wind_kph": 10,
+    "condition": "Clear",
+    "rain_chance": 5,
+    "fantasy_impact": {
+      "dew_advantage": "slight_chase",
+      "batting_factor": 1.04,
+      "swing_factor": 1.0,
+      "pace_factor": 1.0,
+      "spin_factor": 1.0,
+      "rain_risk": "none",
+      "summary": "Mild dew \u2014 slight advantage to chasing team"
+    },
+    "_timestamp": 1774878467.3082628
   }
 }

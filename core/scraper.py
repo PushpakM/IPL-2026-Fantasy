@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CACHE_DIR = BASE_DIR / "data"
 CACHE_FILE = CACHE_DIR / "scraper_cache.json"
 PLAYING_XI_FILE = CACHE_DIR / "playing_xi_cache.json"
+WEATHER_FILE = CACHE_DIR / "weather_cache.json"
 
 _cache = {}
 _cache_ttl = 3600  # 1 hour
@@ -315,6 +316,250 @@ def set_playing_xi_manual(team1: str, team2: str, team1_players: list, team2_pla
     _cache[f"playing_xi_{team1}_{team2}"] = data
     _save_cache()
     return data
+
+
+# ============================================
+# WEATHER DATA — VENUE MATCH CONDITIONS
+# ============================================
+
+# City mapping from venue names
+VENUE_CITY_MAP = {
+    "Wankhede": "Mumbai", "DY Patil": "Mumbai", "Brabourne": "Mumbai",
+    "Chinnaswamy": "Bengaluru", "M. Chinnaswamy": "Bengaluru",
+    "Chepauk": "Chennai", "MA Chidambaram": "Chennai",
+    "Eden Gardens": "Kolkata",
+    "Rajiv Gandhi": "Hyderabad", "Uppal": "Hyderabad",
+    "Arun Jaitley": "Delhi", "Feroz Shah Kotla": "Delhi",
+    "Narendra Modi": "Ahmedabad", "Motera": "Ahmedabad",
+    "Sawai Mansingh": "Jaipur", "SMS": "Jaipur",
+    "Punjab Cricket": "Mohali", "PCA": "Mohali", "Mullanpur": "Mohali",
+    "BRSABV Ekana": "Lucknow", "Ekana": "Lucknow",
+    "Dharamsala": "Dharamsala", "HPCA": "Dharamsala",
+    "Barabati": "Cuttack", "ACA-VDCA": "Visakhapatnam",
+}
+
+# Default weather profiles for Indian cities (March-May IPL window)
+DEFAULT_WEATHER = {
+    "Mumbai": {"temp_c": 32, "humidity": 72, "dew_factor": 0.8, "wind_kph": 12, "condition": "Clear", "rain_chance": 5},
+    "Bengaluru": {"temp_c": 29, "humidity": 55, "dew_factor": 0.4, "wind_kph": 10, "condition": "Partly Cloudy", "rain_chance": 15},
+    "Chennai": {"temp_c": 35, "humidity": 68, "dew_factor": 0.7, "wind_kph": 14, "condition": "Hot & Humid", "rain_chance": 10},
+    "Kolkata": {"temp_c": 34, "humidity": 75, "dew_factor": 0.85, "wind_kph": 8, "condition": "Hot & Humid", "rain_chance": 10},
+    "Hyderabad": {"temp_c": 36, "humidity": 45, "dew_factor": 0.5, "wind_kph": 10, "condition": "Hot & Dry", "rain_chance": 5},
+    "Delhi": {"temp_c": 38, "humidity": 40, "dew_factor": 0.6, "wind_kph": 12, "condition": "Hot", "rain_chance": 5},
+    "Ahmedabad": {"temp_c": 37, "humidity": 35, "dew_factor": 0.4, "wind_kph": 15, "condition": "Hot & Dry", "rain_chance": 3},
+    "Jaipur": {"temp_c": 36, "humidity": 30, "dew_factor": 0.3, "wind_kph": 14, "condition": "Hot & Dry", "rain_chance": 3},
+    "Mohali": {"temp_c": 33, "humidity": 50, "dew_factor": 0.6, "wind_kph": 10, "condition": "Warm", "rain_chance": 8},
+    "Lucknow": {"temp_c": 35, "humidity": 45, "dew_factor": 0.5, "wind_kph": 8, "condition": "Hot", "rain_chance": 5},
+    "Dharamsala": {"temp_c": 24, "humidity": 55, "dew_factor": 0.3, "wind_kph": 8, "condition": "Pleasant", "rain_chance": 15},
+    "Visakhapatnam": {"temp_c": 33, "humidity": 70, "dew_factor": 0.7, "wind_kph": 16, "condition": "Humid & Breezy", "rain_chance": 10},
+    "Cuttack": {"temp_c": 34, "humidity": 70, "dew_factor": 0.7, "wind_kph": 10, "condition": "Hot & Humid", "rain_chance": 10},
+}
+
+
+def get_venue_city(venue_name: str) -> str:
+    """Map venue name to city."""
+    for key, city in VENUE_CITY_MAP.items():
+        if key.lower() in venue_name.lower():
+            return city
+    return ""
+
+
+def get_weather_for_match(venue_name: str, match_date: str = "") -> dict:
+    """
+    Get weather conditions for a match venue.
+    First checks cache, then tries live fetch, falls back to city defaults.
+
+    Returns: {
+        city, temp_c, humidity, dew_factor (0-1), wind_kph,
+        condition, rain_chance (0-100),
+        fantasy_impact: {
+            dew_advantage: "chase"/"bat_first"/"neutral",
+            swing_factor: float (1.0=normal, 1.2=high swing),
+            pace_factor: float (boost for pace in wind),
+            spin_factor: float (boost for spin in dry heat),
+            batting_factor: float (dew helps batting in 2nd innings),
+            rain_risk: "none"/"low"/"moderate"/"high",
+            summary: str
+        }
+    }
+    """
+    cache_key = f"weather_{venue_name}_{match_date}"
+    if _is_cached(cache_key, ttl=1800):  # 30 min cache
+        return _cache[cache_key]
+
+    city = get_venue_city(venue_name)
+
+    # Start with defaults for the city
+    defaults = DEFAULT_WEATHER.get(city, {
+        "temp_c": 32, "humidity": 55, "dew_factor": 0.5,
+        "wind_kph": 10, "condition": "Clear", "rain_chance": 5,
+    })
+
+    # Check if we have a saved weather file with live data
+    weather_data = None
+    if WEATHER_FILE.exists():
+        try:
+            saved = json.loads(WEATHER_FILE.read_text())
+            if saved.get("venue", "").lower() in venue_name.lower() or saved.get("city", "").lower() == city.lower():
+                weather_data = saved
+        except Exception:
+            pass
+
+    if not weather_data:
+        weather_data = {
+            "city": city,
+            "venue": venue_name,
+            "source": "defaults",
+            **defaults,
+        }
+
+    # Calculate fantasy impact from weather conditions
+    weather_data["fantasy_impact"] = _calculate_weather_impact(weather_data)
+    weather_data["_timestamp"] = time.time()
+
+    _cache[cache_key] = weather_data
+    _save_cache()
+
+    return weather_data
+
+
+def set_weather_manual(venue_name: str, temp_c: int, humidity: int, dew_factor: float,
+                       wind_kph: int, condition: str, rain_chance: int) -> dict:
+    """Manually set weather data (from TV/app/weather site)."""
+    city = get_venue_city(venue_name)
+    weather_data = {
+        "city": city,
+        "venue": venue_name,
+        "temp_c": temp_c,
+        "humidity": humidity,
+        "dew_factor": dew_factor,
+        "wind_kph": wind_kph,
+        "condition": condition,
+        "rain_chance": rain_chance,
+        "source": "manual",
+        "updated_at": datetime.now().isoformat(),
+    }
+    weather_data["fantasy_impact"] = _calculate_weather_impact(weather_data)
+
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    WEATHER_FILE.write_text(json.dumps(weather_data, indent=2))
+
+    global _cache
+    _cache[f"weather_{venue_name}"] = {**weather_data, "_timestamp": time.time()}
+    _save_cache()
+    return weather_data
+
+
+def save_weather_data(weather_data: dict):
+    """Save weather data to file."""
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    WEATHER_FILE.write_text(json.dumps(weather_data, indent=2))
+
+
+def _calculate_weather_impact(w: dict) -> dict:
+    """
+    Calculate how weather conditions affect fantasy scoring.
+
+    Key factors:
+    - Dew (high humidity evening) → helps chasing team batsmen, harder for bowlers
+    - High humidity → swing bowling boost (seam movement)
+    - Hot & dry → spin friendly, pace bowlers tire faster
+    - Wind → helps pace bowlers (esp. at coastal venues)
+    - Rain → match could be shortened (DLS), high-floor picks safer
+    """
+    humidity = w.get("humidity", 55)
+    dew = w.get("dew_factor", 0.5)
+    wind = w.get("wind_kph", 10)
+    temp = w.get("temp_c", 32)
+    rain = w.get("rain_chance", 5)
+
+    impact = {}
+
+    # --- DEW ADVANTAGE ---
+    # High dew (>0.7) makes ball wet in 2nd innings → harder to grip for bowlers
+    # Batting team chasing gets advantage
+    if dew >= 0.7:
+        impact["dew_advantage"] = "chase"
+        impact["batting_factor"] = 1.08  # 2nd innings batsmen benefit
+    elif dew >= 0.4:
+        impact["dew_advantage"] = "slight_chase"
+        impact["batting_factor"] = 1.04
+    else:
+        impact["dew_advantage"] = "neutral"
+        impact["batting_factor"] = 1.0
+
+    # --- SWING FACTOR ---
+    # Humidity 65%+ with moderate wind → swing bowling conditions
+    if humidity >= 70 and wind >= 10:
+        impact["swing_factor"] = 1.15  # Pace + swing bowlers thrive
+    elif humidity >= 60:
+        impact["swing_factor"] = 1.08
+    else:
+        impact["swing_factor"] = 1.0
+
+    # --- PACE FACTOR ---
+    # Wind 15+ kph → helps pace bowlers (esp. at coastal venues)
+    # But extreme heat (38+) tires pace bowlers → reduces effectiveness
+    if wind >= 15:
+        impact["pace_factor"] = 1.10
+    elif wind >= 12:
+        impact["pace_factor"] = 1.05
+    else:
+        impact["pace_factor"] = 1.0
+
+    if temp >= 38:
+        impact["pace_factor"] *= 0.95  # Heat fatigue for pacers
+
+    # --- SPIN FACTOR ---
+    # Hot & dry (low humidity, high temp) → pitch dries out → spin friendly
+    if humidity <= 40 and temp >= 35:
+        impact["spin_factor"] = 1.12  # Dry pitch = grip for spinners
+    elif humidity <= 50:
+        impact["spin_factor"] = 1.06
+    else:
+        impact["spin_factor"] = 1.0
+
+    # --- RAIN RISK ---
+    if rain >= 50:
+        impact["rain_risk"] = "high"
+    elif rain >= 25:
+        impact["rain_risk"] = "moderate"
+    elif rain >= 10:
+        impact["rain_risk"] = "low"
+    else:
+        impact["rain_risk"] = "none"
+
+    # --- SUMMARY ---
+    summaries = []
+    if impact["dew_advantage"] == "chase":
+        summaries.append("Heavy dew expected — chasing team favored, bowlers may struggle in 2nd innings")
+    elif impact["dew_advantage"] == "slight_chase":
+        summaries.append("Mild dew — slight advantage to chasing team")
+
+    if impact["swing_factor"] >= 1.10:
+        summaries.append("High humidity + wind — swing bowlers (pace) get a big boost")
+    elif impact["swing_factor"] >= 1.05:
+        summaries.append("Moderate humidity — some swing assistance for pace bowlers")
+
+    if impact["spin_factor"] >= 1.10:
+        summaries.append("Hot & dry — pitch will turn, spinners in play")
+    elif impact["spin_factor"] >= 1.05:
+        summaries.append("Dry conditions — spinners get slight advantage")
+
+    if impact["pace_factor"] >= 1.08:
+        summaries.append("Strong wind — pace bowlers benefit from extra carry")
+
+    if impact["rain_risk"] == "high":
+        summaries.append("HIGH RAIN RISK — pick safe, high-floor players (no volatile picks)")
+    elif impact["rain_risk"] == "moderate":
+        summaries.append("Some rain expected — consider impact on DLS strategy")
+
+    if temp >= 38:
+        summaries.append("Extreme heat — fast bowlers may tire, prefer 3rd/4th seamer rotation")
+
+    impact["summary"] = ". ".join(summaries) if summaries else "Standard conditions — no major weather impact."
+
+    return impact
 
 
 # ============================================

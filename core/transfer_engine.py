@@ -454,8 +454,11 @@ def recommend_transfers(
     # Filter to confirmed XI if available
     if playing_xi:
         confirmed_names = set()
-        for team_players in playing_xi.values():
-            confirmed_names.update(team_players)
+        for value in playing_xi.values():
+            if isinstance(value, dict) and "players" in value:
+                confirmed_names.update(value["players"])
+            elif isinstance(value, list):
+                confirmed_names.update(value)
         if confirmed_names:
             xi_available = [p for p in available if p["Player Name"] in confirmed_names]
             if len(xi_available) >= 5:

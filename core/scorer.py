@@ -1,5 +1,6 @@
 import pandas as pd
 from core.data_loader import load_points_system, load_venue_data
+from core.scraper import get_weather_for_match
 
 # Cache points system
 _POINTS = None
@@ -88,12 +89,66 @@ def get_matchup_bonus(player: dict, venue_name: str = "") -> float:
     return bonus
 
 
-def estimate_fantasy_points(player: dict, venue_name: str = "", platform: str = "tata_ipl") -> float:
+def get_weather_multiplier(player: dict, venue_name: str = "", weather: dict = None) -> float:
+    """
+    Calculate weather-based scoring multiplier for a player.
+
+    Weather impacts:
+    - Dew → batting boost in 2nd innings (all batsmen/WK/AR get mild boost)
+    - Swing conditions → pace bowlers boosted
+    - Dry heat → spinners boosted
+    - Wind → pace bowlers boosted
+    - Rain risk → no direct multiplier, but advisory
+    """
+    if not weather or not weather.get("fantasy_impact"):
+        return 1.0
+
+    impact = weather["fantasy_impact"]
+    role = player.get("RoleCode", "BAT")
+    bowling_style = player.get("Bowling Style", "").lower()
+
+    multiplier = 1.0
+
+    # Dew benefit — batting-side players benefit
+    batting_factor = impact.get("batting_factor", 1.0)
+    if role in ("BAT", "WK"):
+        multiplier *= batting_factor
+    elif role == "AR":
+        # AR gets partial batting benefit + bowling is harder
+        multiplier *= (1 + (batting_factor - 1) * 0.5)
+
+    # Swing factor — pace bowlers benefit from humid/overcast conditions
+    swing = impact.get("swing_factor", 1.0)
+    if role == "BOW" and ("fast" in bowling_style or "medium" in bowling_style or "pace" in bowling_style or not bowling_style):
+        # Default unknown bowling style to pace for this calc
+        is_pace = "spin" not in bowling_style and "leg" not in bowling_style and "off" not in bowling_style and "left-arm orthodox" not in bowling_style
+        if is_pace:
+            multiplier *= swing
+    elif role == "AR" and ("fast" in bowling_style or "medium" in bowling_style):
+        multiplier *= (1 + (swing - 1) * 0.5)  # Partial swing benefit
+
+    # Spin factor — spinners benefit from dry, hot conditions
+    spin = impact.get("spin_factor", 1.0)
+    is_spinner = any(s in bowling_style for s in ["spin", "leg", "off", "left-arm orthodox", "slow"])
+    if role == "BOW" and is_spinner:
+        multiplier *= spin
+    elif role == "AR" and is_spinner:
+        multiplier *= (1 + (spin - 1) * 0.5)
+
+    # Pace factor from wind
+    pace = impact.get("pace_factor", 1.0)
+    if role == "BOW" and not is_spinner:
+        multiplier *= pace
+
+    return round(multiplier, 3)
+
+
+def estimate_fantasy_points(player: dict, venue_name: str = "", platform: str = "tata_ipl", weather: dict = None) -> float:
     """
     Estimate fantasy points for a player in a given match context.
 
     Uses: performance tier, role, venue character, credits (as proxy for ability),
-    and matchup bonus for strong venue-role synergies.
+    matchup bonus for strong venue-role synergies, and weather conditions.
     Returns estimated base points (before captain multiplier).
     """
     role = player.get("RoleCode", "BAT")
@@ -124,7 +179,12 @@ def estimate_fantasy_points(player: dict, venue_name: str = "", platform: str = 
     # Matchup bonus for strong venue-role synergies
     matchup = get_matchup_bonus(player, venue_name)
 
-    estimated = (base + base_score + category_bonus) * venue_mult * matchup
+    # Weather multiplier
+    if weather is None and venue_name:
+        weather = get_weather_for_match(venue_name)
+    weather_mult = get_weather_multiplier(player, venue_name, weather)
+
+    estimated = (base + base_score + category_bonus) * venue_mult * matchup * weather_mult
 
     # Form factor (if available from scraper, default to neutral)
     form = player.get("FormFactor", 1.0)

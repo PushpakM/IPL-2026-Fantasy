@@ -15,10 +15,10 @@
   "captain": "Rohit Sharma",
   "vice_captain": "Hardik Pandya",
   "credits_used": 88.0,
-  "transfers_used": 5,
-  "transfers_remaining": 155,
-  "current_match": 1,
+  "transfers_used": 0,
+  "transfers_remaining": 160,
+  "current_match": 2,
   "boosters_remaining": 7,
   "boosters_used": [],
-  "last_updated": "2026-03-29T15:10:55.248464"
+  "last_updated": "2026-03-29T19:00:00.000000"
 }

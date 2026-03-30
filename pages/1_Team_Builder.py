@@ -16,7 +16,7 @@ from core.transfer_engine import (
     load_state, save_state, set_initial_team, apply_transfers,
     change_captain_vc, recommend_transfers, get_squad_health_report,
 )
-from core.scraper import scrape_playing_xi, set_playing_xi_manual, get_playing_xi_cached
+from core.scraper import scrape_playing_xi, set_playing_xi_manual, get_playing_xi_cached, get_weather_for_match, set_weather_manual
 from core.validator import validate_team
 
 st.set_page_config(page_title="Team Builder | IPL 2026", page_icon="🏏", layout="wide")
@@ -93,6 +93,79 @@ if len(venue_match) > 0:
     with vcol3:
         st.caption(f"**Insight:** {v.get('Key Insight', 'N/A')}")
 
+# --- Weather Conditions ---
+st.markdown("---")
+st.subheader("Weather & Match Conditions")
+
+weather_data = get_weather_for_match(match_info["VenueName"])
+
+if weather_data:
+    wcol1, wcol2, wcol3, wcol4, wcol5 = st.columns(5)
+    with wcol1:
+        st.metric("Temperature", f"{weather_data.get('temp_c', '--')}°C")
+    with wcol2:
+        st.metric("Humidity", f"{weather_data.get('humidity', '--')}%")
+    with wcol3:
+        dew = weather_data.get("dew_factor", 0)
+        dew_label = "Heavy" if dew >= 0.7 else "Moderate" if dew >= 0.4 else "Low"
+        st.metric("Dew Factor", dew_label, delta=f"{dew:.1f}")
+    with wcol4:
+        st.metric("Wind", f"{weather_data.get('wind_kph', '--')} kph")
+    with wcol5:
+        rain = weather_data.get("rain_chance", 0)
+        rain_emoji = "🌧" if rain >= 50 else "🌦" if rain >= 25 else "☀️"
+        st.metric("Rain Chance", f"{rain_emoji} {rain}%")
+
+    # Fantasy impact summary
+    impact = weather_data.get("fantasy_impact", {})
+    if impact:
+        impact_items = []
+        if impact.get("swing_factor", 1.0) > 1.0:
+            impact_items.append(f"Swing: +{(impact['swing_factor']-1)*100:.0f}% pace")
+        if impact.get("spin_factor", 1.0) > 1.0:
+            impact_items.append(f"Spin: +{(impact['spin_factor']-1)*100:.0f}% spinners")
+        if impact.get("batting_factor", 1.0) > 1.0:
+            impact_items.append(f"Dew: +{(impact['batting_factor']-1)*100:.0f}% batting")
+        if impact.get("pace_factor", 1.0) > 1.0:
+            impact_items.append(f"Wind: +{(impact['pace_factor']-1)*100:.0f}% pace")
+
+        if impact_items:
+            st.info("**Weather Boosts:** " + " | ".join(impact_items))
+
+        summary = impact.get("summary", "")
+        if summary:
+            st.caption(f"**Analysis:** {summary}")
+
+        rain_risk = impact.get("rain_risk", "none")
+        if rain_risk in ("moderate", "high"):
+            st.warning(f"**Rain Risk: {rain_risk.upper()}** — Consider high-floor, safe picks. Avoid volatile players in case of DLS.")
+
+    # Source indicator
+    source = weather_data.get("source", "defaults")
+    if source == "defaults":
+        st.caption("Using seasonal defaults. Update with live data below for better accuracy.")
+
+# Manual weather override
+with st.expander("Update Weather Manually"):
+    st.caption("Enter live weather from your weather app or TV broadcast for best accuracy.")
+    mw_col1, mw_col2, mw_col3 = st.columns(3)
+    with mw_col1:
+        mw_temp = st.number_input("Temperature (°C)", min_value=15, max_value=50, value=weather_data.get("temp_c", 32), key="mw_temp")
+        mw_humidity = st.number_input("Humidity (%)", min_value=10, max_value=100, value=weather_data.get("humidity", 55), key="mw_humidity")
+    with mw_col2:
+        mw_dew = st.slider("Dew Factor (0=none, 1=heavy)", 0.0, 1.0, float(weather_data.get("dew_factor", 0.5)), 0.1, key="mw_dew")
+        mw_wind = st.number_input("Wind (kph)", min_value=0, max_value=50, value=weather_data.get("wind_kph", 10), key="mw_wind")
+    with mw_col3:
+        mw_condition = st.selectbox("Condition", ["Clear", "Partly Cloudy", "Overcast", "Hot & Humid", "Hot & Dry", "Warm", "Humid & Breezy", "Pleasant"], index=0, key="mw_condition")
+        mw_rain = st.number_input("Rain Chance (%)", min_value=0, max_value=100, value=weather_data.get("rain_chance", 5), key="mw_rain")
+
+    if st.button("Save Weather Data"):
+        updated_weather = set_weather_manual(
+            match_info["VenueName"], mw_temp, mw_humidity, mw_dew, mw_wind, mw_condition, mw_rain
+        )
+        st.success(f"Weather updated! Impact: {updated_weather['fantasy_impact']['summary'][:100]}")
+        st.rerun()
+
 st.markdown("---")
 
 # --- Playing XI Section ---
@@ -142,8 +215,14 @@ playing_xi = st.session_state.get("playing_xi") or cached_xi
 
 if playing_xi:
     with st.expander("View Current Playing XI", expanded=False):
-        for team_name, player_list in playing_xi.items():
-            st.markdown(f"**{team_name}:** {', '.join(player_list)}")
+        for key in ("team1", "team2"):
+            team_data = playing_xi.get(key, {})
+            if isinstance(team_data, dict) and team_data.get("players"):
+                team_label = team_data.get("team", key)
+                st.markdown(f"**{team_label}:** {', '.join(team_data['players'])}")
+        toss = playing_xi.get("toss", {})
+        if toss and toss.get("winner"):
+            st.markdown(f"**Toss:** {toss['winner']} won, elected to {toss.get('decision', '?')}")
 
 st.markdown("---")
 
@@ -190,6 +269,9 @@ def display_team(team_data, label):
     badges = [f"{team_data['credits_used']}/100 cr", f"Est. {team_data['total_points']} pts"]
     if team_data.get("used_playing_xi"):
         badges.append("XI filtered")
+    if team_data.get("weather"):
+        w = team_data["weather"]
+        badges.append(f"{w['temp_c']}°C {w['condition']}")
     if team_data.get("strategy"):
         badges.append(team_data["strategy"][:50])
 

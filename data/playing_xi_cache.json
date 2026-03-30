@@ -1,0 +1,18 @@
+{
+  "team1": {
+    "team": "MI",
+    "players": [],
+    "source": "none"
+  },
+  "team2": {
+    "team": "KKR",
+    "players": [],
+    "source": "none"
+  },
+  "toss": {
+    "winner": "",
+    "decision": ""
+  },
+  "scraped_at": "2026-03-29T19:20:16.818590",
+  "_timestamp": 1774792216.818601
+}
