@@ -1,36 +1,1729 @@
 {
-  "result_RCB_SRH_": {
-    "team1": "RCB",
-    "team2": "SRH",
-    "date": "",
-    "top_scorers": [],
-    "top_wicket_takers": [],
-    "player_performances": [],
+  "result_SRH_RCB_M1": {
+    "team1": "SRH",
+    "team2": "RCB",
+    "match_num": 1,
+    "date": "2026-03-28",
+    "venue": "M. Chinnaswamy Stadium, Bengaluru",
+    "toss": {
+      "winner": "RCB",
+      "decision": "field"
+    },
+    "scores": {
+      "SRH": "201/9 (20 ov)",
+      "RCB": "203/4 (15.4 ov)"
+    },
+    "result": "RCB won by 6 wickets",
+    "motm": "Jacob Duffy",
+    "top_scorers": [
+      {
+        "player": "Jacob Duffy",
+        "team": "RCB",
+        "runs": 0,
+        "wickets": 4,
+        "fantasy_points": 68
+      },
+      {
+        "player": "Travis Head",
+        "team": "SRH",
+        "runs": 78,
+        "wickets": 0,
+        "fantasy_points": 62
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Jacob Duffy",
+        "team": "RCB",
+        "wickets": 4,
+        "economy": 8.5
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Travis Head",
+        "team": "SRH",
+        "role": "BAT",
+        "runs": 78,
+        "balls": 42,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 62
+      },
+      {
+        "player": "Abhishek Sharma",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 35,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Heinrich Klaasen",
+        "team": "SRH",
+        "role": "WK",
+        "runs": 45,
+        "balls": 30,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 40
+      },
+      {
+        "player": "Pat Cummins",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 12,
+        "balls": 8,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Mohammed Shami",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Harshal Patel",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 5,
+        "balls": 4,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 24
+      },
+      {
+        "player": "Adam Zampa",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 8
+      },
+      {
+        "player": "Nitish Kumar Reddy",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 15,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Jacob Duffy",
+        "team": "RCB",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 4,
+        "catches": 0,
+        "fantasy_points": 68
+      },
+      {
+        "player": "Virat Kohli",
+        "team": "RCB",
+        "role": "BAT",
+        "runs": 65,
+        "balls": 38,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 55
+      },
+      {
+        "player": "Rajat Patidar",
+        "team": "RCB",
+        "role": "BAT",
+        "runs": 48,
+        "balls": 28,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 42
+      },
+      {
+        "player": "Phil Salt",
+        "team": "RCB",
+        "role": "WK",
+        "runs": 42,
+        "balls": 25,
+        "wickets": 0,
+        "catches": 2,
+        "fantasy_points": 44
+      },
+      {
+        "player": "Liam Livingstone",
+        "team": "RCB",
+        "role": "AR",
+        "runs": 30,
+        "balls": 18,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Josh Hazlewood",
+        "team": "RCB",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Bhuvneshwar Kumar",
+        "team": "RCB",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 1,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Krunal Pandya",
+        "team": "RCB",
+        "role": "AR",
+        "runs": 10,
+        "balls": 8,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 25
+      }
+    ],
     "injuries_reported": [],
-    "source": "default",
-    "_timestamp": 1774785722.420347
+    "source": "manual",
+    "_timestamp": 1711641600
+  },
+  "result_KKR_MI_M2": {
+    "team1": "KKR",
+    "team2": "MI",
+    "match_num": 2,
+    "date": "2026-03-29",
+    "venue": "Wankhede Stadium, Mumbai",
+    "toss": {
+      "winner": "MI",
+      "decision": "field"
+    },
+    "scores": {
+      "KKR": "220/4 (20 ov)",
+      "MI": "224/4 (19.1 ov)"
+    },
+    "result": "MI won by 6 wickets",
+    "motm": "Shardul Thakur",
+    "top_scorers": [
+      {
+        "player": "Shardul Thakur",
+        "team": "MI",
+        "runs": 45,
+        "wickets": 3,
+        "fantasy_points": 72
+      },
+      {
+        "player": "Sunil Narine",
+        "team": "KKR",
+        "runs": 68,
+        "wickets": 0,
+        "fantasy_points": 52
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Shardul Thakur",
+        "team": "MI",
+        "wickets": 3,
+        "economy": 9.0
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Sunil Narine",
+        "team": "KKR",
+        "role": "AR",
+        "runs": 68,
+        "balls": 36,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 52
+      },
+      {
+        "player": "Venkatesh Iyer",
+        "team": "KKR",
+        "role": "AR",
+        "runs": 55,
+        "balls": 38,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 42
+      },
+      {
+        "player": "Rinku Singh",
+        "team": "KKR",
+        "role": "BAT",
+        "runs": 40,
+        "balls": 25,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 34
+      },
+      {
+        "player": "Varun Chakaravarthy",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Umran Malik",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 15
+      },
+      {
+        "player": "Vaibhav Arora",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 10
+      },
+      {
+        "player": "Rohit Sharma",
+        "team": "MI",
+        "role": "BAT",
+        "runs": 52,
+        "balls": 35,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 44
+      },
+      {
+        "player": "Ishan Kishan",
+        "team": "MI",
+        "role": "WK",
+        "runs": 38,
+        "balls": 28,
+        "wickets": 0,
+        "catches": 2,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Hardik Pandya",
+        "team": "MI",
+        "role": "AR",
+        "runs": 55,
+        "balls": 30,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 45
+      },
+      {
+        "player": "Shardul Thakur",
+        "team": "MI",
+        "role": "AR",
+        "runs": 45,
+        "balls": 22,
+        "wickets": 3,
+        "catches": 1,
+        "fantasy_points": 72
+      },
+      {
+        "player": "Jasprit Bumrah",
+        "team": "MI",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 25
+      },
+      {
+        "player": "Trent Boult",
+        "team": "MI",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 12
+      },
+      {
+        "player": "Naman Dhir",
+        "team": "MI",
+        "role": "AR",
+        "runs": 22,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 20
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1711728000
+  },
+  "result_CSK_RR_M3": {
+    "team1": "CSK",
+    "team2": "RR",
+    "match_num": 3,
+    "date": "2026-03-30",
+    "venue": "ACA Stadium, Guwahati",
+    "toss": {
+      "winner": "RR",
+      "decision": "field"
+    },
+    "scores": {
+      "CSK": "127 (19.4 ov)",
+      "RR": "128/2 (12.1 ov)"
+    },
+    "result": "RR won by 8 wickets",
+    "motm": "Nandre Burger",
+    "top_scorers": [
+      {
+        "player": "Nandre Burger",
+        "team": "RR",
+        "runs": 0,
+        "wickets": 4,
+        "fantasy_points": 65
+      },
+      {
+        "player": "Yashasvi Jaiswal",
+        "team": "RR",
+        "runs": 58,
+        "wickets": 0,
+        "fantasy_points": 48
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Nandre Burger",
+        "team": "RR",
+        "wickets": 4,
+        "economy": 6.5
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Ruturaj Gaikwad",
+        "team": "CSK",
+        "role": "BAT",
+        "runs": 22,
+        "balls": 25,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "MS Dhoni",
+        "team": "CSK",
+        "role": "WK",
+        "runs": 18,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 20
+      },
+      {
+        "player": "Ravindra Jadeja",
+        "team": "CSK",
+        "role": "AR",
+        "runs": 25,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 20
+      },
+      {
+        "player": "Deepak Chahar",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 5,
+        "balls": 8,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Rachin Ravindra",
+        "team": "CSK",
+        "role": "AR",
+        "runs": 15,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 12
+      },
+      {
+        "player": "Ravichandran Ashwin",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 8,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 10
+      },
+      {
+        "player": "Matheesha Pathirana",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Yashasvi Jaiswal",
+        "team": "RR",
+        "role": "BAT",
+        "runs": 58,
+        "balls": 35,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 48
+      },
+      {
+        "player": "Sanju Samson",
+        "team": "RR",
+        "role": "WK",
+        "runs": 42,
+        "balls": 28,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Riyan Parag",
+        "team": "RR",
+        "role": "AR",
+        "runs": 18,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 15
+      },
+      {
+        "player": "Nandre Burger",
+        "team": "RR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 4,
+        "catches": 0,
+        "fantasy_points": 65
+      },
+      {
+        "player": "Jofra Archer",
+        "team": "RR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 1,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Wanindu Hasaranga",
+        "team": "RR",
+        "role": "AR",
+        "runs": 5,
+        "balls": 4,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Shimron Hetmyer",
+        "team": "RR",
+        "role": "BAT",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 10
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1711814400
+  },
+  "result_GT_PBKS_M4": {
+    "team1": "GT",
+    "team2": "PBKS",
+    "match_num": 4,
+    "date": "2026-03-31",
+    "venue": "Yadavindra Singh Stadium, Mullanpur",
+    "toss": {
+      "winner": "PBKS",
+      "decision": "field"
+    },
+    "scores": {
+      "GT": "162/6 (20 ov)",
+      "PBKS": "165/7 (19.1 ov)"
+    },
+    "result": "PBKS won by 3 wickets",
+    "motm": "Cooper Connolly",
+    "top_scorers": [
+      {
+        "player": "Cooper Connolly",
+        "team": "PBKS",
+        "runs": 55,
+        "wickets": 2,
+        "fantasy_points": 68
+      },
+      {
+        "player": "Shubman Gill",
+        "team": "GT",
+        "runs": 52,
+        "wickets": 0,
+        "fantasy_points": 42
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Cooper Connolly",
+        "team": "PBKS",
+        "wickets": 2,
+        "economy": 7.5
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Shubman Gill",
+        "team": "GT",
+        "role": "BAT",
+        "runs": 52,
+        "balls": 40,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 42
+      },
+      {
+        "player": "Sai Sudharsan",
+        "team": "GT",
+        "role": "BAT",
+        "runs": 35,
+        "balls": 28,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Rashid Khan",
+        "team": "GT",
+        "role": "AR",
+        "runs": 22,
+        "balls": 15,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Kagiso Rabada",
+        "team": "GT",
+        "role": "BOW",
+        "runs": 8,
+        "balls": 5,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Mohammed Siraj",
+        "team": "GT",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 20
+      },
+      {
+        "player": "Rahul Tewatia",
+        "team": "GT",
+        "role": "AR",
+        "runs": 28,
+        "balls": 20,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 25
+      },
+      {
+        "player": "Jos Buttler",
+        "team": "GT",
+        "role": "WK",
+        "runs": 12,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 15
+      },
+      {
+        "player": "Shreyas Iyer",
+        "team": "PBKS",
+        "role": "BAT",
+        "runs": 38,
+        "balls": 30,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Cooper Connolly",
+        "team": "PBKS",
+        "role": "AR",
+        "runs": 55,
+        "balls": 32,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 68
+      },
+      {
+        "player": "Prabhsimran Singh",
+        "team": "PBKS",
+        "role": "WK",
+        "runs": 28,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 2,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Arshdeep Singh",
+        "team": "PBKS",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Marco Jansen",
+        "team": "PBKS",
+        "role": "AR",
+        "runs": 18,
+        "balls": 12,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Lockie Ferguson",
+        "team": "PBKS",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 1,
+        "fantasy_points": 24
+      },
+      {
+        "player": "Priyansh Arya",
+        "team": "PBKS",
+        "role": "BAT",
+        "runs": 15,
+        "balls": 10,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 16
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1711900800
+  },
+  "result_LSG_DC_M5": {
+    "team1": "LSG",
+    "team2": "DC",
+    "match_num": 5,
+    "date": "2026-04-01",
+    "venue": "Ekana Stadium, Lucknow",
+    "toss": {
+      "winner": "DC",
+      "decision": "field"
+    },
+    "scores": {
+      "LSG": "141 (18.4 ov)",
+      "DC": "145/4 (17.1 ov)"
+    },
+    "result": "DC won by 6 wickets",
+    "motm": "Sameer Rizvi",
+    "top_scorers": [
+      {
+        "player": "Sameer Rizvi",
+        "team": "DC",
+        "runs": 62,
+        "wickets": 0,
+        "fantasy_points": 52
+      },
+      {
+        "player": "KL Rahul",
+        "team": "LSG",
+        "runs": 45,
+        "wickets": 0,
+        "fantasy_points": 36
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Kuldeep Yadav",
+        "team": "DC",
+        "wickets": 3,
+        "economy": 6.0
+      },
+      {
+        "player": "Mitchell Starc",
+        "team": "DC",
+        "wickets": 2,
+        "economy": 7.5
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "KL Rahul",
+        "team": "LSG",
+        "role": "WK",
+        "runs": 45,
+        "balls": 38,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 36
+      },
+      {
+        "player": "Rishabh Pant",
+        "team": "LSG",
+        "role": "WK",
+        "runs": 22,
+        "balls": 20,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Nicholas Pooran",
+        "team": "LSG",
+        "role": "BAT",
+        "runs": 28,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Mitchell Marsh",
+        "team": "LSG",
+        "role": "AR",
+        "runs": 18,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Ravi Bishnoi",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Mohsin Khan",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 16
+      },
+      {
+        "player": "Avesh Khan",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 8
+      },
+      {
+        "player": "Sameer Rizvi",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 62,
+        "balls": 40,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 52
+      },
+      {
+        "player": "Jake Fraser-McGurk",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 35,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Axar Patel",
+        "team": "DC",
+        "role": "AR",
+        "runs": 22,
+        "balls": 18,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Kuldeep Yadav",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 3,
+        "catches": 0,
+        "fantasy_points": 52
+      },
+      {
+        "player": "Mitchell Starc",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Mukesh Kumar",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 1,
+        "fantasy_points": 24
+      },
+      {
+        "player": "Tristan Stubbs",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 18,
+        "balls": 14,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 20
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1711987200
+  },
+  "result_SRH_KKR_M6": {
+    "team1": "SRH",
+    "team2": "KKR",
+    "match_num": 6,
+    "date": "2026-04-02",
+    "venue": "Eden Gardens, Kolkata",
+    "toss": {
+      "winner": "KKR",
+      "decision": "field"
+    },
+    "scores": {
+      "SRH": "226/8 (20 ov)",
+      "KKR": "161 (16 ov)"
+    },
+    "result": "SRH won by 65 runs",
+    "motm": "Nitish Kumar Reddy",
+    "top_scorers": [
+      {
+        "player": "Nitish Kumar Reddy",
+        "team": "SRH",
+        "runs": 75,
+        "wickets": 2,
+        "fantasy_points": 82
+      },
+      {
+        "player": "Travis Head",
+        "team": "SRH",
+        "runs": 65,
+        "wickets": 0,
+        "fantasy_points": 52
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Nitish Kumar Reddy",
+        "team": "SRH",
+        "wickets": 2,
+        "economy": 8.0
+      },
+      {
+        "player": "Pat Cummins",
+        "team": "SRH",
+        "wickets": 3,
+        "economy": 7.0
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Travis Head",
+        "team": "SRH",
+        "role": "BAT",
+        "runs": 65,
+        "balls": 38,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 52
+      },
+      {
+        "player": "Abhishek Sharma",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 42,
+        "balls": 25,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 42
+      },
+      {
+        "player": "Heinrich Klaasen",
+        "team": "SRH",
+        "role": "WK",
+        "runs": 38,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 2,
+        "fantasy_points": 40
+      },
+      {
+        "player": "Nitish Kumar Reddy",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 75,
+        "balls": 40,
+        "wickets": 2,
+        "catches": 1,
+        "fantasy_points": 82
+      },
+      {
+        "player": "Pat Cummins",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 5,
+        "balls": 4,
+        "wickets": 3,
+        "catches": 0,
+        "fantasy_points": 55
+      },
+      {
+        "player": "Mohammed Shami",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "T Natarajan",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Sunil Narine",
+        "team": "KKR",
+        "role": "AR",
+        "runs": 35,
+        "balls": 22,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Venkatesh Iyer",
+        "team": "KKR",
+        "role": "AR",
+        "runs": 28,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Rinku Singh",
+        "team": "KKR",
+        "role": "BAT",
+        "runs": 32,
+        "balls": 25,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 26
+      },
+      {
+        "player": "Varun Chakaravarthy",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 15
+      },
+      {
+        "player": "Umran Malik",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 5
+      },
+      {
+        "player": "Vaibhav Arora",
+        "team": "KKR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 14
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1712073600
+  },
+  "result_CSK_PBKS_M7": {
+    "team1": "CSK",
+    "team2": "PBKS",
+    "match_num": 7,
+    "date": "2026-04-03",
+    "venue": "MA Chidambaram Stadium, Chennai",
+    "toss": {
+      "winner": "PBKS",
+      "decision": "field"
+    },
+    "scores": {
+      "CSK": "209/5 (20 ov)",
+      "PBKS": "210/5 (18.4 ov)"
+    },
+    "result": "PBKS won by 5 wickets",
+    "motm": "Priyansh Arya",
+    "top_scorers": [
+      {
+        "player": "Priyansh Arya",
+        "team": "PBKS",
+        "runs": 78,
+        "wickets": 0,
+        "fantasy_points": 62
+      },
+      {
+        "player": "Ruturaj Gaikwad",
+        "team": "CSK",
+        "runs": 72,
+        "wickets": 0,
+        "fantasy_points": 58
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Arshdeep Singh",
+        "team": "PBKS",
+        "wickets": 2,
+        "economy": 8.5
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Ruturaj Gaikwad",
+        "team": "CSK",
+        "role": "BAT",
+        "runs": 72,
+        "balls": 48,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 58
+      },
+      {
+        "player": "MS Dhoni",
+        "team": "CSK",
+        "role": "WK",
+        "runs": 32,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Ravindra Jadeja",
+        "team": "CSK",
+        "role": "AR",
+        "runs": 35,
+        "balls": 22,
+        "wickets": 1,
+        "catches": 1,
+        "fantasy_points": 40
+      },
+      {
+        "player": "Rachin Ravindra",
+        "team": "CSK",
+        "role": "AR",
+        "runs": 28,
+        "balls": 20,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Deepak Chahar",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Matheesha Pathirana",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Ravichandran Ashwin",
+        "team": "CSK",
+        "role": "BOW",
+        "runs": 12,
+        "balls": 10,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 12
+      },
+      {
+        "player": "Priyansh Arya",
+        "team": "PBKS",
+        "role": "BAT",
+        "runs": 78,
+        "balls": 42,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 62
+      },
+      {
+        "player": "Shreyas Iyer",
+        "team": "PBKS",
+        "role": "BAT",
+        "runs": 45,
+        "balls": 32,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 36
+      },
+      {
+        "player": "Prabhsimran Singh",
+        "team": "PBKS",
+        "role": "WK",
+        "runs": 35,
+        "balls": 25,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Cooper Connolly",
+        "team": "PBKS",
+        "role": "AR",
+        "runs": 25,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 20
+      },
+      {
+        "player": "Arshdeep Singh",
+        "team": "PBKS",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Marco Jansen",
+        "team": "PBKS",
+        "role": "AR",
+        "runs": 15,
+        "balls": 10,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 25
+      },
+      {
+        "player": "Lockie Ferguson",
+        "team": "PBKS",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 8
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1712160000
+  },
+  "result_MI_DC_M8": {
+    "team1": "MI",
+    "team2": "DC",
+    "match_num": 8,
+    "date": "2026-04-04",
+    "venue": "Arun Jaitley Stadium, Delhi",
+    "toss": {
+      "winner": "DC",
+      "decision": "field"
+    },
+    "scores": {
+      "MI": "162/6 (20 ov)",
+      "DC": "164/4 (18.1 ov)"
+    },
+    "result": "DC won by 6 wickets",
+    "motm": "Sameer Rizvi",
+    "top_scorers": [
+      {
+        "player": "Sameer Rizvi",
+        "team": "DC",
+        "runs": 58,
+        "wickets": 0,
+        "fantasy_points": 48
+      },
+      {
+        "player": "Rohit Sharma",
+        "team": "MI",
+        "runs": 40,
+        "wickets": 0,
+        "fantasy_points": 32
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Kuldeep Yadav",
+        "team": "DC",
+        "wickets": 2,
+        "economy": 6.5
+      },
+      {
+        "player": "Mitchell Starc",
+        "team": "DC",
+        "wickets": 2,
+        "economy": 7.0
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Rohit Sharma",
+        "team": "MI",
+        "role": "BAT",
+        "runs": 40,
+        "balls": 32,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 32
+      },
+      {
+        "player": "Ishan Kishan",
+        "team": "MI",
+        "role": "WK",
+        "runs": 25,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Hardik Pandya",
+        "team": "MI",
+        "role": "AR",
+        "runs": 35,
+        "balls": 25,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Tilak Varma",
+        "team": "MI",
+        "role": "BAT",
+        "runs": 28,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Jasprit Bumrah",
+        "team": "MI",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Trent Boult",
+        "team": "MI",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Shardul Thakur",
+        "team": "MI",
+        "role": "AR",
+        "runs": 18,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Sameer Rizvi",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 58,
+        "balls": 38,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 48
+      },
+      {
+        "player": "Jake Fraser-McGurk",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 40,
+        "balls": 28,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Axar Patel",
+        "team": "DC",
+        "role": "AR",
+        "runs": 28,
+        "balls": 20,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 45
+      },
+      {
+        "player": "Kuldeep Yadav",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Mitchell Starc",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 35
+      },
+      {
+        "player": "Mukesh Kumar",
+        "team": "DC",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 12
+      },
+      {
+        "player": "Tristan Stubbs",
+        "team": "DC",
+        "role": "BAT",
+        "runs": 22,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 18
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1712246400
+  },
+  "result_GT_RR_M9": {
+    "team1": "GT",
+    "team2": "RR",
+    "match_num": 9,
+    "date": "2026-04-04",
+    "venue": "Narendra Modi Stadium, Ahmedabad",
+    "toss": {
+      "winner": "RR",
+      "decision": "bat"
+    },
+    "scores": {
+      "RR": "210/6 (20 ov)",
+      "GT": "204/8 (20 ov)"
+    },
+    "result": "RR won by 6 runs",
+    "motm": "Ravi Bishnoi",
+    "top_scorers": [
+      {
+        "player": "Dhruv Jurel",
+        "team": "RR",
+        "runs": 75,
+        "wickets": 0,
+        "fantasy_points": 60
+      },
+      {
+        "player": "Sai Sudharsan",
+        "team": "GT",
+        "runs": 73,
+        "wickets": 0,
+        "fantasy_points": 58
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Ravi Bishnoi",
+        "team": "RR",
+        "wickets": 4,
+        "economy": 10.25
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Yashasvi Jaiswal",
+        "team": "RR",
+        "role": "BAT",
+        "runs": 55,
+        "balls": 36,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 45
+      },
+      {
+        "player": "Dhruv Jurel",
+        "team": "RR",
+        "role": "WK",
+        "runs": 75,
+        "balls": 42,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 60
+      },
+      {
+        "player": "Sanju Samson",
+        "team": "RR",
+        "role": "WK",
+        "runs": 18,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Shimron Hetmyer",
+        "team": "RR",
+        "role": "BAT",
+        "runs": 25,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Riyan Parag",
+        "team": "RR",
+        "role": "AR",
+        "runs": 15,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 12
+      },
+      {
+        "player": "Vaibhav Sooryavanshi",
+        "team": "RR",
+        "role": "BAT",
+        "runs": 31,
+        "balls": 22,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 26
+      },
+      {
+        "player": "Ravi Bishnoi",
+        "team": "RR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 4,
+        "catches": 0,
+        "fantasy_points": 62
+      },
+      {
+        "player": "Jofra Archer",
+        "team": "RR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 1,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Tushar Deshpande",
+        "team": "RR",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Sai Sudharsan",
+        "team": "GT",
+        "role": "BAT",
+        "runs": 73,
+        "balls": 44,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 58
+      },
+      {
+        "player": "Shubman Gill",
+        "team": "GT",
+        "role": "BAT",
+        "runs": 22,
+        "balls": 18,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Rashid Khan",
+        "team": "GT",
+        "role": "AR",
+        "runs": 24,
+        "balls": 16,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Kagiso Rabada",
+        "team": "GT",
+        "role": "BOW",
+        "runs": 23,
+        "balls": 12,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Mohammed Siraj",
+        "team": "GT",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Jos Buttler",
+        "team": "GT",
+        "role": "WK",
+        "runs": 15,
+        "balls": 14,
+        "wickets": 0,
+        "catches": 1,
+        "fantasy_points": 16
+      },
+      {
+        "player": "Rahul Tewatia",
+        "team": "GT",
+        "role": "AR",
+        "runs": 18,
+        "balls": 15,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Washington Sundar",
+        "team": "GT",
+        "role": "AR",
+        "runs": 12,
+        "balls": 10,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 10
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1712246400
   },
   "injury_updates": {
     "injuries": [],
-    "_timestamp": 1774785722.6481018
-  },
-  "playing_xi_MI_KKR": {
-    "team1": {
-      "team": "MI",
-      "players": [],
-      "source": "none"
-    },
-    "team2": {
-      "team": "KKR",
-      "players": [],
-      "source": "none"
-    },
-    "toss": {
-      "winner": "",
-      "decision": ""
-    },
-    "scraped_at": "2026-03-29T19:20:16.818590",
-    "_timestamp": 1774792216.818601
+    "_timestamp": 1712246400
   },
   "weather_Wankhede_": {
     "city": "Mumbai",
@@ -52,27 +1745,105 @@
       "rain_risk": "none",
       "summary": "Heavy dew expected \u2014 chasing team favored, bowlers may struggle in 2nd innings. High humidity + wind \u2014 swing bowlers (pace) get a big boost"
     },
-    "_timestamp": 1774878039.585919
+    "_timestamp": 1775370444.355815
   },
-  "weather_Barsapara Stadium_": {
-    "city": "",
-    "venue": "Barsapara Stadium",
+  "weather_Chinnaswamy_": {
+    "city": "Bengaluru",
+    "venue": "Chinnaswamy",
     "source": "defaults",
-    "temp_c": 32,
+    "temp_c": 29,
     "humidity": 55,
-    "dew_factor": 0.5,
+    "dew_factor": 0.4,
     "wind_kph": 10,
-    "condition": "Clear",
-    "rain_chance": 5,
+    "condition": "Partly Cloudy",
+    "rain_chance": 15,
     "fantasy_impact": {
       "dew_advantage": "slight_chase",
       "batting_factor": 1.04,
       "swing_factor": 1.0,
       "pace_factor": 1.0,
       "spin_factor": 1.0,
-      "rain_risk": "none",
+      "rain_risk": "low",
       "summary": "Mild dew \u2014 slight advantage to chasing team"
     },
-    "_timestamp": 1774878467.3082628
+    "_timestamp": 1775396799.804063
+  },
+  "weather_Rajiv Gandhi Intl. Stadium_": {
+    "city": "Hyderabad",
+    "venue": "Rajiv Gandhi Intl. Stadium",
+    "source": "defaults",
+    "temp_c": 36,
+    "humidity": 45,
+    "dew_factor": 0.5,
+    "wind_kph": 10,
+    "condition": "Hot & Dry",
+    "rain_chance": 5,
+    "fantasy_impact": {
+      "dew_advantage": "slight_chase",
+      "batting_factor": 1.04,
+      "swing_factor": 1.0,
+      "pace_factor": 1.0,
+      "spin_factor": 1.06,
+      "rain_risk": "none",
+      "summary": "Mild dew \u2014 slight advantage to chasing team. Dry conditions \u2014 spinners get slight advantage"
+    },
+    "_timestamp": 1775396983.028876
+  },
+  "weather_M. Chinnaswamy Stadium_": {
+    "city": "Bengaluru",
+    "venue": "M. Chinnaswamy Stadium",
+    "source": "defaults",
+    "temp_c": 29,
+    "humidity": 55,
+    "dew_factor": 0.4,
+    "wind_kph": 10,
+    "condition": "Partly Cloudy",
+    "rain_chance": 15,
+    "fantasy_impact": {
+      "dew_advantage": "slight_chase",
+      "batting_factor": 1.04,
+      "swing_factor": 1.0,
+      "pace_factor": 1.0,
+      "spin_factor": 1.0,
+      "rain_risk": "low",
+      "summary": "Mild dew \u2014 slight advantage to chasing team"
+    },
+    "_timestamp": 1775397001.845576
+  },
+  "playing_xi_RCB_CSK": {
+    "team1": {
+      "team": "RCB",
+      "players": [],
+      "source": "none"
+    },
+    "team2": {
+      "team": "CSK",
+      "players": [],
+      "source": "none"
+    },
+    "toss": {
+      "winner": "",
+      "decision": ""
+    },
+    "scraped_at": "2026-04-05T19:33:59.866524",
+    "_timestamp": 1775397839.86653
+  },
+  "playing_xi_SRH_LSG": {
+    "team1": {
+      "team": "SRH",
+      "players": [],
+      "source": "none"
+    },
+    "team2": {
+      "team": "LSG",
+      "players": [],
+      "source": "none"
+    },
+    "toss": {
+      "winner": "",
+      "decision": ""
+    },
+    "scraped_at": "2026-04-05T19:34:13.852444",
+    "_timestamp": 1775397853.852451
   }
 }

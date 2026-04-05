@@ -1,11 +1,11 @@
 {
   "team1": {
-    "team": "MI",
+    "team": "SRH",
     "players": [],
     "source": "none"
   },
   "team2": {
-    "team": "KKR",
+    "team": "LSG",
     "players": [],
     "source": "none"
   },
@@ -13,6 +13,6 @@
     "winner": "",
     "decision": ""
   },
-  "scraped_at": "2026-03-29T19:20:16.818590",
-  "_timestamp": 1774792216.818601
+  "scraped_at": "2026-04-05T19:34:13.852444",
+  "_timestamp": 1775397853.852451
 }

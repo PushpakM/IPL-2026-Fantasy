@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 import os
 from pathlib import Path
 
@@ -164,5 +165,17 @@ def load_enriched_players():
     injured_names = set(injuries["Player"].dropna().tolist())
     merged["IsInjured"] = merged["Player Name"].isin(injured_names)
     merged["IsAvailable"] = (merged["Availability"] == "Available") & (~merged["IsInjured"])
+
+    # Load form factors from match history
+    form_file = BASE_DIR / "data" / "form_factors.json"
+    if form_file.exists():
+        try:
+            with open(form_file) as f:
+                form_factors = json.load(f)
+            merged["FormFactor"] = merged["Player Name"].map(form_factors).fillna(1.0)
+        except Exception:
+            merged["FormFactor"] = 1.0
+    else:
+        merged["FormFactor"] = 1.0
 
     return merged
