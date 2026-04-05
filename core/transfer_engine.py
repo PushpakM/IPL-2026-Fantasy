@@ -715,22 +715,41 @@ def get_squad_health_report(
 # Captain / VC (unchanged — always free)
 # ---------------------------------------------------------------------------
 
-def recommend_captain_vc(current_team_data: list, match_info: dict) -> dict:
+def recommend_captain_vc(current_team_data: list, match_info: dict, schedule_df=None) -> dict:
+    """
+    TATA IPL captain selection: AR preference + hot streak + fixture density.
+    """
+    from core.scorer import get_hot_streak_multiplier
+
     venue = match_info.get("VenueName", "")
+    match_num = match_info.get("Match #", 1)
     playing_teams = _get_playing_teams(match_info)
 
     scored = []
-    for p in current_team_data:
-        if p.get("Team", "") in playing_teams:
-            pts = estimate_fantasy_points(p, venue)
-            scored.append({"player": p, "estimated_pts": pts})
+    active_players = [p for p in current_team_data if p.get("Team", "") in playing_teams]
+    if not active_players:
+        active_players = current_team_data
 
-    if not scored:
-        for p in current_team_data:
-            pts = estimate_fantasy_points(p, venue)
-            scored.append({"player": p, "estimated_pts": pts})
+    for p in active_players:
+        pts = estimate_fantasy_points(p, venue, platform="tata_ipl")
+        captain_score = pts
 
-    scored.sort(key=lambda x: x["estimated_pts"], reverse=True)
+        # AR preference: +10% for all-rounders (dual contribution as captain)
+        if p.get("RoleCode") == "AR":
+            captain_score *= 1.10
+
+        # Hot streak bonus
+        captain_score *= get_hot_streak_multiplier(p)
+
+        # Fixture density bonus
+        if schedule_df is not None:
+            from core.team_selector import get_fixture_density_factor
+            fd = get_fixture_density_factor(p.get("Team", ""), schedule_df, match_num)
+            captain_score *= fd
+
+        scored.append({"player": p, "estimated_pts": pts, "captain_score": captain_score})
+
+    scored.sort(key=lambda x: x["captain_score"], reverse=True)
 
     captain = scored[0] if scored else None
     vc = scored[1] if len(scored) > 1 else None

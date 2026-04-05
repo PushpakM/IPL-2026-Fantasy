@@ -180,8 +180,10 @@ with xi_col1:
             xi_data = scrape_playing_xi(match_info["Team1"], match_info["Team2"])
             if xi_data:
                 st.session_state["playing_xi"] = xi_data
-                for team_name, player_list in xi_data.items():
-                    st.success(f"{team_name}: {len(player_list)} players confirmed")
+                for key in ("team1", "team2"):
+                    td = xi_data.get(key, {})
+                    if isinstance(td, dict) and td.get("players"):
+                        st.success(f"{td['team']}: {len(td['players'])} players confirmed")
             else:
                 st.warning("Could not scrape playing XI. Enter manually or generate without XI filter.")
 
@@ -324,6 +326,7 @@ if generate_tata:
         tata_result = build_tata_ipl_team(
             players_df, match_info["Team1"], match_info["Team2"],
             match_info["VenueName"], next_venue, playing_xi,
+            schedule_df=schedule_df, current_match_num=match_info["Match #"],
         )
         st.session_state["tata_ipl_team"] = tata_result
 

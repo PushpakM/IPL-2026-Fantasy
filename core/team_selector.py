@@ -4,13 +4,16 @@ Builds optimal 11-player teams within 100 credit budget and role constraints.
 
 Two platforms:
 - My11Circle: fresh team from scratch every match, 3 risk modes (safe/balanced/aggressive)
-- TATA IPL: season-long team with transfer optimization
+- TATA IPL: season-long team with transfer optimization + fixture-density factor
 """
 
 from typing import Dict, List, Optional
 import pandas as pd
 
-from core.scorer import estimate_fantasy_points, get_matchup_bonus, TIER_WEIGHTS, get_weather_multiplier
+from core.scorer import (
+    estimate_fantasy_points, get_matchup_bonus, TIER_WEIGHTS,
+    get_hot_streak_multiplier, get_effective_tier,
+)
 from core.scraper import get_weather_for_match
 from core.validator import validate_team, get_valid_role_combinations, PLATFORM_RULES
 
@@ -23,6 +26,43 @@ RISK_MODE_WEIGHTS = {
 }
 
 
+# ============================================
+# FIXTURE-DENSITY FACTOR (TATA IPL only)
+# ============================================
+
+def get_fixture_density_factor(
+    player_team: str,
+    schedule_df: pd.DataFrame = None,
+    current_match_num: int = 1,
+    window: int = 5,
+) -> float:
+    """
+    Count how many matches player's team has in the next `window` games.
+    Players from busy teams score more over the season — pick them.
+
+    Returns: 4-5 matches → 1.10, 3 → 1.0, 2 → 0.95, 1 → 0.90, 0 → 0.85
+    """
+    if schedule_df is None or not player_team:
+        return 1.0
+
+    # Look at next `window` matches after current
+    upcoming = schedule_df[schedule_df["Match #"] > current_match_num].head(window)
+    if len(upcoming) == 0:
+        return 1.0
+
+    team_matches = upcoming[
+        (upcoming["Team1"] == player_team) | (upcoming["Team2"] == player_team)
+    ]
+    count = len(team_matches)
+
+    density_map = {5: 1.10, 4: 1.10, 3: 1.0, 2: 0.95, 1: 0.90, 0: 0.85}
+    return density_map.get(count, 1.0)
+
+
+# ============================================
+# MAIN TEAM BUILDER
+# ============================================
+
 def build_best_xi(
     players_df: pd.DataFrame,
     team1: str,
@@ -33,6 +73,8 @@ def build_best_xi(
     next_venue: str = "",
     playing_xi: dict = None,
     risk_mode: str = "balanced",
+    schedule_df: pd.DataFrame = None,
+    current_match_num: int = 1,
 ) -> dict:
     """
     Build the optimal 11-player team for a match.
@@ -40,6 +82,8 @@ def build_best_xi(
     Args:
         risk_mode: "safe" (high-floor), "balanced" (default), "aggressive" (differentials)
                    Only affects My11Circle. TATA IPL always uses balanced.
+        schedule_df: Full season schedule (needed for TATA IPL fixture-density factor)
+        current_match_num: Current match number in season
     """
     # Filter to available players from the two teams
     mask = (
@@ -53,10 +97,8 @@ def build_best_xi(
         confirmed_names = set()
         for key, value in playing_xi.items():
             if isinstance(value, dict) and "players" in value:
-                # Nested format: {team1: {team, players}, team2: {team, players}}
                 confirmed_names.update(value["players"])
             elif isinstance(value, list):
-                # Simple format: {team_name: [players]}
                 confirmed_names.update(value)
         if confirmed_names:
             xi_mask = available["Player Name"].isin(confirmed_names)
@@ -70,6 +112,14 @@ def build_best_xi(
     # Fetch weather for this venue
     weather = get_weather_for_match(venue_name) if venue_name else None
 
+    # Extract toss info from playing_xi cache
+    toss_info = None
+    if playing_xi and isinstance(playing_xi.get("toss"), dict):
+        toss_info = playing_xi["toss"]
+
+    # Build all_players list for H2H / intel context
+    all_players_list = available.to_dict("records")
+
     # Determine effective risk mode
     effective_mode = risk_mode if platform == "my11circle" else "balanced"
     mode_weights = RISK_MODE_WEIGHTS.get(effective_mode, RISK_MODE_WEIGHTS["balanced"])
@@ -79,6 +129,8 @@ def build_best_xi(
     scores = []
     for _, row in available.iterrows():
         p = row.to_dict()
+        player_team = p.get("Team", "")
+        opposing_team = team2 if player_team == team1 else team1
 
         # Apply risk-mode adjusted scoring
         original_tier = p.get("Performance Tier", "Value")
@@ -93,7 +145,11 @@ def build_best_xi(
         else:
             p_adjusted = p
 
-        score1 = estimate_fantasy_points(p_adjusted, venue_name, platform, weather=weather)
+        score1 = estimate_fantasy_points(
+            p_adjusted, venue_name, platform, weather=weather,
+            opposing_team=opposing_team, toss_info=toss_info,
+            all_players=all_players_list,
+        )
 
         # Aggressive mode: extra bonus for all-rounders (more scoring dimensions)
         if effective_mode == "aggressive" and p.get("RoleCode") == "AR":
@@ -103,8 +159,13 @@ def build_best_xi(
         if effective_mode == "safe" and p.get("Credits", 0) >= 9.0:
             score1 *= 1.05
 
+        # TATA IPL: Apply fixture-density factor
+        if platform == "tata_ipl" and schedule_df is not None:
+            fd = get_fixture_density_factor(player_team, schedule_df, current_match_num)
+            score1 *= fd
+
         if use_lookahead:
-            score2 = estimate_fantasy_points(p_adjusted, next_venue, platform, weather=None)  # No weather for future match
+            score2 = estimate_fantasy_points(p_adjusted, next_venue, platform, weather=None)
             combined = 0.7 * score1 + 0.3 * score2
         else:
             combined = score1
@@ -178,10 +239,14 @@ def build_best_xi(
         best_team = sorted_all[:11]
         best_total = sum(p["EstimatedPts"] for p in best_team)
 
-    # Captain/VC selection varies by risk mode
+    # Captain/VC selection
     best_team.sort(key=lambda x: x["MatchPts"], reverse=True)
-    if effective_mode == "aggressive":
-        # Aggressive: pick high-upside captain (all-rounder or venue specialist)
+
+    if platform == "tata_ipl":
+        # TATA IPL: weight toward AR + hot streak + fixture density
+        captain, vc = _select_tata_captain_vc(best_team, schedule_df, current_match_num)
+    elif effective_mode == "aggressive":
+        # Aggressive My11Circle: AR preference
         ar_or_top = [p for p in best_team if p.get("RoleCode") == "AR"]
         if ar_or_top and ar_or_top[0]["MatchPts"] >= best_team[1]["MatchPts"] * 0.85:
             captain = ar_or_top[0]["Player Name"]
@@ -190,6 +255,7 @@ def build_best_xi(
             captain = best_team[0]["Player Name"]
             vc = best_team[1]["Player Name"]
     else:
+        # Safe/Balanced My11Circle: highest points
         captain = best_team[0]["Player Name"]
         vc = best_team[1]["Player Name"]
 
@@ -200,7 +266,6 @@ def build_best_xi(
     total_credits = sum(p.get("Credits", 0) for p in best_team)
     is_valid, errors = validate_team(best_team, platform)
 
-    # Strategy description
     strategy_desc = {
         "safe": "High-floor proven performers. Star/Premium heavy, consistent scorers.",
         "balanced": "Optimal mix of reliability and value. Best overall expected points.",
@@ -236,6 +301,44 @@ def build_best_xi(
         "weather": weather_info,
     }
 
+
+def _select_tata_captain_vc(
+    sorted_team: list,
+    schedule_df: pd.DataFrame = None,
+    current_match_num: int = 1,
+) -> tuple:
+    """
+    TATA IPL captain selection: AR preference + hot streak + fixture density.
+    Captain = highest captain_score, VC = second highest.
+    """
+    scored = []
+    for p in sorted_team:
+        base_pts = p.get("MatchPts", 0)
+        captain_score = base_pts
+
+        # AR preference: +10% for all-rounders (dual contribution as captain)
+        if p.get("RoleCode") == "AR":
+            captain_score *= 1.10
+
+        # Hot streak bonus
+        captain_score *= get_hot_streak_multiplier(p)
+
+        # Fixture density bonus
+        if schedule_df is not None:
+            fd = get_fixture_density_factor(p.get("Team", ""), schedule_df, current_match_num)
+            captain_score *= fd
+
+        scored.append((p["Player Name"], captain_score))
+
+    scored.sort(key=lambda x: x[1], reverse=True)
+    captain = scored[0][0] if scored else sorted_team[0]["Player Name"]
+    vc = scored[1][0] if len(scored) > 1 else sorted_team[1]["Player Name"]
+    return captain, vc
+
+
+# ============================================
+# CONVENIENCE BUILDERS
+# ============================================
 
 def build_my11circle_team(
     players_df: pd.DataFrame,
@@ -276,13 +379,17 @@ def build_tata_ipl_team(
     venue_name: str = "",
     next_venue: str = "",
     playing_xi: dict = None,
+    schedule_df: pd.DataFrame = None,
+    current_match_num: int = 1,
 ) -> dict:
-    """Build TATA IPL team with 2-match lookahead."""
+    """Build TATA IPL team with 2-match lookahead + fixture-density."""
     return build_best_xi(
         players_df, team1, team2, venue_name,
         platform="tata_ipl", credit_budget=100.0,
         next_venue=next_venue, playing_xi=playing_xi,
         risk_mode="balanced",
+        schedule_df=schedule_df,
+        current_match_num=current_match_num,
     )
 
 
@@ -291,14 +398,16 @@ def build_teams_for_match(
     match_info: dict,
     next_match_info: dict = None,
     playing_xi: dict = None,
+    schedule_df: pd.DataFrame = None,
 ) -> dict:
     team1 = match_info.get("Team1", "")
     team2 = match_info.get("Team2", "")
     venue = match_info.get("VenueName", "")
+    match_num = match_info.get("Match #", 1)
     next_venue = next_match_info.get("VenueName", "") if next_match_info else ""
 
     my11 = build_my11circle_team(players_df, team1, team2, venue, playing_xi)
-    tata = build_tata_ipl_team(players_df, team1, team2, venue, next_venue, playing_xi)
+    tata = build_tata_ipl_team(players_df, team1, team2, venue, next_venue, playing_xi, schedule_df, match_num)
 
     return {
         "match": f"{team1} vs {team2}",
@@ -321,7 +430,8 @@ def suggest_differential_picks(
     diffs = []
     for _, row in candidates.iterrows():
         p = row.to_dict()
-        pts = estimate_fantasy_points(p, venue)
+        opposing_team = team2 if p.get("Team") == team1 else team1
+        pts = estimate_fantasy_points(p, venue, opposing_team=opposing_team)
         credits = p.get("Credits", 6.0)
         matchup = get_matchup_bonus(p, venue)
         efficiency = pts / credits if credits > 0 else 0
