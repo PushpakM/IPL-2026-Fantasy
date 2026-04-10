@@ -1845,5 +1845,277 @@
     },
     "scraped_at": "2026-04-05T19:34:13.852444",
     "_timestamp": 1775397853.852451
+  },
+  "result_SRH_LSG_M10": {
+    "team1": "SRH",
+    "team2": "LSG",
+    "match_num": 10,
+    "date": "2026-04-05",
+    "venue": "Rajiv Gandhi Intl. Stadium, Hyderabad",
+    "toss": {
+      "winner": "LSG",
+      "decision": "field"
+    },
+    "scores": {
+      "SRH": "156/9 (20 ov)",
+      "LSG": "160/5 (19.5 ov)"
+    },
+    "result": "LSG won by 5 wickets",
+    "motm": "Mohammed Shami",
+    "top_scorers": [
+      {
+        "player": "Rishabh Pant",
+        "team": "LSG",
+        "runs": 68,
+        "wickets": 0,
+        "fantasy_points": 55
+      },
+      {
+        "player": "Heinrich Klaasen",
+        "team": "SRH",
+        "runs": 62,
+        "wickets": 0,
+        "fantasy_points": 50
+      }
+    ],
+    "top_wicket_takers": [
+      {
+        "player": "Mohammed Shami",
+        "team": "LSG",
+        "wickets": 2,
+        "economy": 2.25
+      },
+      {
+        "player": "Avesh Khan",
+        "team": "LSG",
+        "wickets": 2,
+        "economy": 9.0
+      }
+    ],
+    "player_performances": [
+      {
+        "player": "Travis Head",
+        "team": "SRH",
+        "role": "BAT",
+        "runs": 7,
+        "balls": 8,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 8
+      },
+      {
+        "player": "Abhishek Sharma",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 0,
+        "balls": 2,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 2
+      },
+      {
+        "player": "Ishan Kishan",
+        "team": "SRH",
+        "role": "WK",
+        "runs": 1,
+        "balls": 4,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 4
+      },
+      {
+        "player": "Liam Livingstone",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 14,
+        "balls": 20,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Heinrich Klaasen",
+        "team": "SRH",
+        "role": "WK",
+        "runs": 62,
+        "balls": 41,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 50
+      },
+      {
+        "player": "Nitish Kumar Reddy",
+        "team": "SRH",
+        "role": "AR",
+        "runs": 56,
+        "balls": 33,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 45
+      },
+      {
+        "player": "Harshal Patel",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 4,
+        "balls": 2,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 10
+      },
+      {
+        "player": "Shivang Kumar",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 5,
+        "balls": 4,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 22
+      },
+      {
+        "player": "Harsh Dubey",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Eshan Malinga",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 18
+      },
+      {
+        "player": "Jaydev Unadkat",
+        "team": "SRH",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 4
+      },
+      {
+        "player": "Aiden Markram",
+        "team": "LSG",
+        "role": "BAT",
+        "runs": 45,
+        "balls": 27,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 38
+      },
+      {
+        "player": "Mitchell Marsh",
+        "team": "LSG",
+        "role": "AR",
+        "runs": 14,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Rishabh Pant",
+        "team": "LSG",
+        "role": "WK",
+        "runs": 68,
+        "balls": 50,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 55
+      },
+      {
+        "player": "Ayush Badoni",
+        "team": "LSG",
+        "role": "BAT",
+        "runs": 12,
+        "balls": 9,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 14
+      },
+      {
+        "player": "Nicholas Pooran",
+        "team": "LSG",
+        "role": "BAT",
+        "runs": 1,
+        "balls": 4,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 4
+      },
+      {
+        "player": "Abdul Samad",
+        "team": "LSG",
+        "role": "BAT",
+        "runs": 16,
+        "balls": 12,
+        "wickets": 0,
+        "catches": 0,
+        "fantasy_points": 16
+      },
+      {
+        "player": "Mohammed Shami",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 55
+      },
+      {
+        "player": "Avesh Khan",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 30
+      },
+      {
+        "player": "Prince Yadav",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 2,
+        "catches": 0,
+        "fantasy_points": 28
+      },
+      {
+        "player": "Manimaran Siddharth",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 20
+      },
+      {
+        "player": "Digvesh Singh",
+        "team": "LSG",
+        "role": "BOW",
+        "runs": 0,
+        "balls": 0,
+        "wickets": 1,
+        "catches": 0,
+        "fantasy_points": 12
+      }
+    ],
+    "injuries_reported": [],
+    "source": "manual",
+    "_timestamp": 1712332800
   }
 }
